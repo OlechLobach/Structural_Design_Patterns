@@ -1,10 +1,19 @@
-﻿namespace Structural_Design_Patterns
+﻿using System;
+using BridgePattern;
+namespace BridgePattern
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            IMessageSender emailSender = new EmailMessageSender();
+            IMessageSender smsSender = new SMSMessageSender();
+
+            Message shortEmailMessage = new ShortMessage(emailSender);
+            Message longSMSMessage = new LongMessage(smsSender);
+
+            shortEmailMessage.Send();
+            longSMSMessage.Send();
         }
     }
 }
