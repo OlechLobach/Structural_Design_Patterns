@@ -1,19 +1,18 @@
 ﻿using System;
-using BridgePattern;
-namespace BridgePattern
+using AdapterPattern;
+namespace AdapterPattern
 {
     class Program
     {
         static void Main(string[] args)
         {
-            IMessageSender emailSender = new EmailMessageSender();
-            IMessageSender smsSender = new SMSMessageSender();
+            ITarget target = new Adapter();
 
-            Message shortEmailMessage = new ShortMessage(emailSender);
-            Message longSMSMessage = new LongMessage(smsSender);
+            target.Request();
 
-            shortEmailMessage.Send();
-            longSMSMessage.Send();
+            Console.WriteLine("\nUsing the adapter to call the specific request:");
+            target = new Adapter2();
+            target.Request();
         }
     }
 }
